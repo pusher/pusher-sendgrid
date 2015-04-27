@@ -3,42 +3,85 @@
   <title>Pusher Sendgrid Integration</title>
   <script src="//js.pusher.com/2.2/pusher.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/nostalgiaz/bootstrap-switch/master/dist/css/bootstrap3/bootstrap-switch.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/nostalgiaz/bootstrap-switch/master/dist/js/bootstrap-switch.min.js"></script>
+
+  <style type="text/css" media="screen">
+    div.inner {
+      margin-top: 200px;
+    }
+
+    div.bootstrap-switch {
+      height: 40px;
+    }
+
+  </style>
+
 </head>
 <body>
 
-  <h1>Hello World</h1>
+  <div class="container">
+
+    <div class="inner">
+      <h1 class="text-center">
+        An h1 that can be quite long for your title
+      </h1>
+
+      <div class="inputs text-center">
+
+        <div id="email-input-wrapper">
+          <input id="email" type="email" placeholder="Your email">
+        </div>
+
+        <div id="notification-message-wrapper">
+          <input id="notification" type="text" placeholder="Notification message">
+        </div>
+
+        <input type="checkbox" name="my-checkbox" id="subscribe" checked>
+
+        <button id="submit" type="submit">Send Notification</button>
+
+      </div>
 
 
-  <button id="subscribe">Go offline</button>
 
-  <input id="email" type="email" placeholder="Enter email address">
+      <p id="incoming-notification"></p>
+    </div>
 
-  <input id="notification" type="text" placeholder="Notification message">
-  <button id="submit" type="submit">Send Notification</button>
 
-  <p id="incoming-notification"></p>
+
+  </div>
+
+
 
   <script>
+
+   $("[name='my-checkbox']").bootstrapSwitch({
+    onText: "ONLINE",
+    offText: "OFFLINE"
+   });
 
     var pusher = new Pusher('ef2b3fea8d4c4a6f6912');
   
     var channelName = '<%= @channel_name %>';
     var channel = pusher.subscribe(channelName);
 
+    function listenForNotifications() {
+      channel.bind('new_notification', function(data){
+        $('#incoming-notification').text(data.message);
+      }); 
+    }
 
-    channel.bind('new_notification', function(data){
-      $('#incoming-notification').text(data.message);
+    listenForNotifications();
+
+    $('#subscribe').on('switchChange.bootstrapSwitch', function(event, state){
+      channel = pusher[ state ? 'subscribe' : 'unsubscribe' ](channelName);
+      channel && listenForNotifications();
     });
 
-    $('#subscribe').on('click', function(){
-      if (pusher.channel(channelName)){
-        pusher.unsubscribe(channelName);
-        $(this).text('Come online');
-      } else {
-        channel = pusher.subscribe(channelName);
-        $(this).text('Go offline');
-      }
-    });
 
     $('#submit').on('click', function(){
       var message = $('#notification').val();
