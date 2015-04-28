@@ -6,9 +6,6 @@ require 'securerandom'
 
 Pusher.url = ENV["SENDGRID_PUSHER_URL"]
 
-enable :sessions
-set :session_secret, 'super secret encryption key'
-
 sendgrid = SendGrid::Client.new(api_user: ENV["SENDGRID_USERNAME"], api_key: ENV["SENDGRID_PASSWORD"])
 
 get '/' do 
