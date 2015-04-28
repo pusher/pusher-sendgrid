@@ -6,17 +6,13 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httpclient (2.6.0.1)
-    json (1.8.2)
-    mime-types (2.4.3)
+    mime-types (2.5)
     multi_json (1.11.0)
     netrc (0.10.3)
     pusher (0.14.4)
       httpclient (~> 2.5)
       multi_json (~> 1.0)
       signature (~> 0.1.8)
-    pusher-client (0.6.0)
-      json
-      websocket (~> 1.0)
     rack (1.6.0)
     rack-protection (1.5.3)
       rack
@@ -37,13 +33,11 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    websocket (1.2.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   pusher
-  pusher-client
   sendgrid-ruby
   sinatra
