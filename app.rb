@@ -15,7 +15,7 @@ end
 
 post '/notification' do 
   channel_name = params[:channel_name]
-  channel = Pusher.get("/channels/#{channel_name}")
+  channel = Pusher.channel_info(channel_name)
 
   if channel[:occupied]
     Pusher[channel_name].trigger('new_notification', {message: params[:message]})

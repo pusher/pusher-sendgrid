@@ -18,6 +18,36 @@
       height: 40px;
     }
 
+    div#switch {
+      position:relative;
+      margin: 0 auto;
+      height: 300px;
+      width: 400px;
+      padding-top:130px;
+    }
+
+    div.dot-container{
+      position: absolute;
+      top: 0;
+      height: 50%;
+      width: 50%;
+    }
+
+    div#switch div#top-left {
+      left:0;
+      border-bottom: 2px red dashed;
+    }
+
+    div#switch div#top-right{
+      right: 0;
+      border-left: 2px green dashed;
+      border-bottom: 2px green dashed;
+    }
+
+    div#switch div#subscribe {
+
+    }
+
   </style>
 
 </head>
@@ -29,6 +59,7 @@
       <h1 class="text-center">
         An h1 that can be quite long for your title
       </h1>
+      <p class="text-center">Just input your email and some other blurb about how cool it will be to and tell them we don't store the email or anything like that.</p>
 
       <div class="inputs text-center">
 
@@ -41,10 +72,12 @@
         </div>
 
         <div id="send">
-          <button id="submit" type="submit">Send Notification</button>
+          <button id="submit" class="btn btn-default" type="submit">Send Notification</button>
         </div>
 
         <div id="switch">
+          <div id="top-left" class="dot-container"></div>
+          <div id="top-right" class="dot-container"></div>
           <input type="checkbox" name="my-checkbox" id="subscribe" checked>
         </div>
 
@@ -80,11 +113,28 @@
       }); 
     }
 
+    function diagramTransition(choice){
+      choice = (choice == "email") ? ["green", "red"] : ["red", "green"];
+      $('#top-left').css({
+        "border-bottom": "2px "+choice[0]+" dashed"
+      });
+      $('#top-right').css({
+        "border-bottom": "2px "+choice[1]+" dashed"
+      });
+    }
+
     listenForNotifications();
 
     $('#subscribe').on('switchChange.bootstrapSwitch', function(event, state){
-      channel = pusher[ state ? 'subscribe' : 'unsubscribe' ](channelName);
-      channel && listenForNotifications();
+
+      if (state){
+        pusher.subscribe(channelName);
+        listenForNotifications();
+        diagramTransition("app");
+      } else {
+        pusher.unsubscribe(channelName);
+        diagramTransition("email");
+      }
     });
 
 
