@@ -3,116 +3,68 @@
   <title>Pusher Sendgrid Integration</title>
   <script src="//js.pusher.com/2.2/pusher.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.rawgit.com/nostalgiaz/bootstrap-switch/master/dist/css/bootstrap3/bootstrap-switch.min.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap-overrides.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="https://cdn.rawgit.com/nostalgiaz/bootstrap-switch/master/dist/js/bootstrap-switch.min.js"></script>
-
-  <style type="text/css" media="screen">
-    div.inner {
-      margin-top: 200px;
-    }
-
-    div.bootstrap-switch {
-      height: 40px;
-    }
-
-    div#switch {
-      position:relative;
-      margin: 0 auto;
-      height: 300px;
-      width: 400px;
-      padding-top:130px;
-    }
-
-    div.dot-container{
-      position: absolute;
-      top: 0;
-      height: 50%;
-      width: 50%;
-    }
-
-    div#switch div#top-left {
-      left:0;
-      border-bottom: 2px red dashed;
-    }
-
-    div#switch div#top-right{
-      right: 0;
-      border-left: 2px green dashed;
-      border-bottom: 2px green dashed;
-    }
-
-    div#switch div#subscribe {
-
-    }
-
-  </style>
-
 </head>
 <body>
 
-  <div class="container">
-
-    <div class="inner">
-      <h1 class="text-center">
-        An h1 that can be quite long for your title
-      </h1>
-      <p class="text-center">Just input your email and some other blurb about how cool it will be to and tell them we don't store the email or anything like that.</p>
-
-      <div class="inputs text-center">
-
-        <div id="email-input-wrapper">
-          <input id="email" type="email" placeholder="Your email">
+  <header class="navbar">
+    <div class="container navbar-container">
+      <div class="row">
+        <div class="col-xs-5 col-sm-6">
+          <a href="https://pusher.com"><img class="full-logo" src="/images/pusher-logo.png" width="111" height="37"></a>
+          <a href="https://pusher.com"><img class="small-logo" src="/images/pusher_logo_p.png" height="37"></a>
         </div>
-
-        <div id="notification-message-wrapper">
-          <input id="notification" type="text" placeholder="Notification message">
+        <div class="col-xs-7 col-sm-6">
+          <a class="signup-link" href='https://pusher.com/signup'>Create a Free Account</a>
         </div>
-
-        <div id="send">
-          <button id="submit" class="btn btn-default" type="submit">Send Notification</button>
-        </div>
-
-        <div id="switch">
-          <div id="top-left" class="dot-container"></div>
-          <div id="top-right" class="dot-container"></div>
-          <input type="checkbox" name="my-checkbox" id="subscribe" checked>
-        </div>
-
-
       </div>
-
-
-
-      <p id="incoming-notification"></p>
     </div>
+  </header>
 
-
-
-  </div>
-
-
-
-  <script>
-
-   $("[name='my-checkbox']").bootstrapSwitch({
-    onText: "ONLINE",
-    offText: "OFFLINE"
-   });
-
+  <div class="container">
+    <div class="inner">
+      <h1 class="text-center page-heading">
+        Sendgrid Online/Offline Notification Demo
+      </h1>
+      <h4 class="text-center page-subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit. molestie, ante imperdiet egestas.</p>
+        <div class="inputs text-center">
+          <span id="email-input-wrapper">
+            <input id="email" class="create-notification" type="email" placeholder="Your email address">
+          </span>
+          <span id="notification-message-wrapper">
+            <input class="create-notification" id="notification" type="text" placeholder="Type your message...">
+          </span>
+          <div id="send">
+            <a class="submit-notification btn btn-lg btn-clear btn-wide btn-default">Send Notification</a>
+          </div>
+          <div id="switch">
+            <div id="top-left" class="dot-container"></div>
+            <div id="top-right" class="dot-container"></div>
+            <input type="checkbox" name="my-checkbox" id="subscribe" checked>
+          </div>
+        </div>
+        <p id="incoming-notification"></p>
+      </div>
+    </div>
+    <script>
+    $("[name='my-checkbox']").bootstrapSwitch({
+      onText: "ONLINE",
+      offText: "OFFLINE"
+    });
     var pusher = new Pusher('ef2b3fea8d4c4a6f6912');
-  
+
     var channelName = '<%= @channel_name %>';
     var channel = pusher.subscribe(channelName);
-
     function listenForNotifications() {
       channel.bind('new_notification', function(data){
         $('#incoming-notification').text(data.message);
-      }); 
+      });
     }
-
     function diagramTransition(choice){
       choice = (choice == "email") ? ["green", "red"] : ["red", "green"];
       $('#top-left').css({
@@ -122,11 +74,8 @@
         "border-bottom": "2px "+choice[1]+" dashed"
       });
     }
-
     listenForNotifications();
-
     $('#subscribe').on('switchChange.bootstrapSwitch', function(event, state){
-
       if (state){
         pusher.subscribe(channelName);
         listenForNotifications();
@@ -136,12 +85,9 @@
         diagramTransition("email");
       }
     });
-
-
     $('#submit').on('click', function(){
       var message = $('#notification').val();
       var email = $('#email').val();
-
       if (email && notification){
         $.post('/notification', {
           message: message,
@@ -151,10 +97,7 @@
       } else {
         alert('Form invalid bro')
       }
-
     });
-
   </script>
-
 </body>
 </html>

@@ -1,0 +1,160 @@
+@import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400);
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 200;
+  color: white;
+  background: -o-linear-gradient(right, #2193b0, #6dd5ed  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #2193b0, #6dd5ed  ); /* For Firefox 3.6 to 15 */
+  background: -webkit-linear-gradient(top left, #2193b0, #6dd5ed);
+  background: linear-gradient(to right, #2193b0, #6dd5ed);
+  height: 100vh;
+}
+
+.signup-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  float: right;
+  margin-top: 8px;
+}
+
+.signup-link:hover {
+  color: #EB0752;
+  text-decoration: none;
+}
+
+header.navbar {
+  background: transparent;
+  height: 50px;
+  color: white;
+}
+
+.navbar-container {
+  padding-top: 10px;
+}
+
+.btn {
+  font-weight: 300;
+}
+
+div.inner {
+  margin-top: 200px;
+}
+
+div.bootstrap-switch {
+  height: 40px;
+}
+
+div#switch {
+  position:relative;
+  margin: 0 auto;
+  height: 300px;
+  width: 400px;
+  padding-top:130px;
+}
+
+div.dot-container{
+  position: absolute;
+  top: 0;
+  height: 50%;
+  width: 50%;
+}
+
+div#switch div#top-left {
+  left:0;
+  border-bottom: 2px red dashed;
+}
+
+div#switch div#top-right{
+  right: 0;
+  border-left: 2px green dashed;
+  border-bottom: 2px green dashed;
+}
+
+div#switch div#subscribe {
+
+}
+
+input.create-notification {
+  background: transparent !important;
+  border: none;
+  font-size: 28px !important;
+  height: 52px;
+  line-height: 52px;
+  box-shadow: none;
+  width: 318px;
+  vertical-align: middle;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  letter-spacing: 0.075rem;
+  margin-right: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+input.create-notification:hover, input.create-notification:focus {
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+input.create-notification:focus {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+input.create-notification::-webkit-input-placeholder {
+  color: white;
+  font-weight: 200;
+  opacity: 0.6;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+}
+
+input.create-notification:focus::-webkit-input-placeholder{
+  opacity: 1;
+}
+
+h1.page-heading{
+  color: white;
+  border:none;
+  font-weight: 200;
+  font-size: 36px;
+}
+
+.page-subheading {
+  font-weight: 200;
+  line-height: 32px;
+}
+
+.small-logo, .full-logo {
+  transition: height 0.4s;
+  -webkit-transition: height 0.4s; /* Safari */
+  -moz-transition: height 0.4s;
+  -o-transition: height 0.4s;
+}
+
+.small-logo {
+  height: 0;
+}
+
+.full-logo {
+  height: 37px;
+}
+
+@media screen and (max-width: 991px) {
+  div.devices {
+    width: 85%;
+  }
+
+  .small-logo {
+    height: 37px;
+  }
+
+  .full-logo {
+    height: 0;
+    width: 0;
+  }
+}
