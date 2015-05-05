@@ -60,7 +60,7 @@ div.dot-container{
 
 div#switch div#top-left {
   left:0;
-  border-bottom: 2px red dashed;
+  /*border-bottom: 2px red dashed;*/
 }
 
 div#switch div#top-right{
@@ -182,6 +182,7 @@ div#email-diagram {
 }
 
 div#you-got-mail {
+  display:none;
   margin-top: 20%;
 }
 
