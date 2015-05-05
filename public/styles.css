@@ -1,5 +1,10 @@
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400);
 
+@font-face {
+  font-family: 'Icomoon';
+  src: url('fonts/icomoon.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 200;
@@ -38,25 +43,18 @@ header.navbar {
 }
 
 div.inner {
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
 div.bootstrap-switch {
   height: 40px;
 }
 
-div#switch {
-  position:relative;
-  margin: 0 auto;
-  height: 300px;
-  width: 400px;
-  padding-top:130px;
-}
 
 div.dot-container{
   position: absolute;
   top: 0;
-  height: 50%;
+  height: 200px;
   width: 50%;
 }
 
@@ -67,12 +65,13 @@ div#switch div#top-left {
 
 div#switch div#top-right{
   right: 0;
-  border-left: 2px green dashed;
-  border-bottom: 2px green dashed;
+  border-left: 2px #74e8bb dashed;
+  border-bottom: 2px #74e8bb dashed;
 }
 
-div#switch div#subscribe {
 
+div#send {
+  margin-top:75px;
 }
 
 input.create-notification {
@@ -117,6 +116,15 @@ input.create-notification:focus::-webkit-input-placeholder{
   opacity: 1;
 }
 
+span.bootstrap-switch-handle-on, span.bootstrap-switch-handle-off {
+  background: #74e8bb !important;
+  color: white !important;
+}
+
+/*span.bootstrap-switch-handle-off {
+  background: transparent !important;
+}*/
+
 h1.page-heading{
   color: white;
   border:none;
@@ -144,7 +152,95 @@ h1.page-heading{
   height: 37px;
 }
 
-@media screen and (max-width: 991px) {
+div#switch {
+  position:relative;
+  /*margin: 0 auto;*/
+  float: left;
+  height: 300px;
+  /*width: 40%;*/
+  width: 450px;
+  padding-top:180px;
+}
+
+.bootstrap-switch {
+  border-color: transparent !important;
+}
+
+div#app-diagram {
+  float: left;
+  position:relative;
+}
+
+div#email-diagram {
+  float: left;
+  position: relative;
+}
+
+.mail-icon {
+  font-family: Icomoon;
+  font-size: 60px;
+}
+
+div#you-got-mail {
+  margin-top: 20%;
+}
+
+div.diagram {
+  height: 240px;
+  background-image: url(images/browser_window.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 340px;
+  margin-top: 80px;
+}
+
+img#smiley {
+  zoom: 50%;
+}
+span#text-container {
+  vertical-align: middle;
+}
+
+div#notification-container {
+  display:none;
+  position: absolute;
+  top: 40;
+  right: 20;
+  min-width: 100px;
+  min-height: 30px;
+  max-width: 300px;
+  border-radius: 6px;
+  background-color: white;
+  padding: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  color: #9ca8aa;
+  text-align: left;
+}
+
+#notification-text {
+  vertical-align: middle;
+}
+
+p#mail-alert {
+  font-size: 16px;
+}
+
+@media screen and (max-width: 1200px){
+
+  div#switch {
+    width: 280px;
+  }
+
+  div.diagram {
+    width: 330px;
+  }
+
+}
+
+@media screen and (max-width: 994px) {
   div.devices {
     width: 85%;
   }
@@ -156,5 +252,67 @@ h1.page-heading{
   .full-logo {
     height: 0;
     width: 0;
+  }
+
+  /*div#switch P*/
+  div.container {
+    width: inherit;
+  }
+
+  div.diagram {
+    width: 320px;
+  }
+
+
+}
+
+@media screen and (max-width: 950px){
+  div.diagram {width: 310px;}
+}
+
+@media screen and (max-width: 930px) {
+  div.diagram {width: 290px;}
+}
+
+@media screen and (max-width: 892px){
+  div.diagram {width: 270px;}
+}
+
+@media screen and (max-width: 850px){
+  div.diagram {width: 250px;}
+}
+
+@media screen and (max-width: 810px) {
+  div.diagram {width: 210px;}
+}
+
+@media screen and (max-width: 740px ){
+  #email-diagram, #switch {
+    display: none;
+  }
+
+  a.submit-notification {
+    margin-top: -30px;
+  }
+
+  #app-diagram {
+    float:none !important;
+    margin: 0 auto;
+    width: 500px;
+    height: 500px;
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  #app-diagram {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  #app-diagram {
+    width: 350px;
   }
 }
