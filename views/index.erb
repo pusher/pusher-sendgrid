@@ -30,9 +30,10 @@
   <div class="container">
     <div class="inner">
       <h1 class="text-center page-heading">
-        Sendgrid Online/Offline Notification Demo
+        Escape Notification Overload With Pusher and Sendgrid
       </h1>
-      <h4 class="text-center page-subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit. molestie, ante imperdiet egestas.</h4>
+      <h4 class="text-center page-subheading">Flick the switch to online, and you'll get an in-app notification with Pusher. Flick it to offline, and you'll get an email via Sendgrid.</h4>
+      <p class="text-center disclaimer">We will not store your email address.</p>
         <div class="inputs text-center">
           <span id="email-input-wrapper">
             <input autocomplete="off" id="email" class="create-notification" type="email" placeholder="Your email address">
@@ -41,7 +42,7 @@
             <input autocomplete="off"  class="create-notification" id="notification" type="text" placeholder="Type your message...">
           </span>
           <div id="send">
-            <a id="submit" class="submit-notification btn btn-lg btn-clear btn-wide btn-default">Send Notification</a>
+            <a id="submit" disabled="true" class="submit-notification btn btn-lg btn-clear btn-wide btn-default">Send Notification</a>
           </div>
           <div id="diagrams">
             <div id="email-diagram" class="diagram">
@@ -155,6 +156,18 @@
       }
     }
 
+    $('.create-notification').on('keyup', validateForm);
+
+    function validateForm(){
+      var message = $('#notification').val();
+      var email = $('#email').val();
+      var button = $('#submit');
+      if (message && email) {
+        button.attr('disabled', false)
+      } else {
+        if (!button.is('[disabled]')) button.attr('disabled', true);
+      }
+    }
 
     function youGotMail(){
       var element = (mailIconMovedToOtherDiagram) ? "#app-diagram #you-got-mail" : "#you-got-mail"
@@ -178,7 +191,7 @@
         youGotMail();
       }
 
-      if (email && notification){
+      if (email && message){
         var self = this;
         $(this).attr('disabled', true);
 
@@ -190,7 +203,7 @@
           $(self).attr('disabled', false);
         });
       } else {
-        alert('Form invalid bro')
+        alert('Please enter both your email address and your message.')
       }
     });
   </script>

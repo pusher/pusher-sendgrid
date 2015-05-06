@@ -16,7 +16,6 @@ body {
   height: 100vh;
 }
 
-
 a.btn-default.submit-notification#submit[disabled] {
   background-color: inherit !important;
   border-color: inherit !important;
@@ -147,7 +146,11 @@ h1.page-heading{
 .page-subheading {
   font-weight: 200;
   line-height: 32px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+}
+
+p.disclaimer {
+  margin-bottom: 30px;
 }
 
 .small-logo, .full-logo {
