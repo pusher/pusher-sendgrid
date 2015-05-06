@@ -16,6 +16,18 @@ body {
   height: 100vh;
 }
 
+
+a.btn-default.submit-notification#submit[disabled] {
+  background-color: inherit !important;
+  border-color: inherit !important;
+}
+
+.bootstrap-switch .bootstrap-switch-handle-on,
+.bootstrap-switch-label,
+.bootstrap-switch .bootstrap-switch-handle-off {
+  padding: 8px 12px !important;
+}
+
 .signup-link {
   color: #FFFFFF;
   text-decoration: none;

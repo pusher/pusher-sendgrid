@@ -3,13 +3,13 @@
   <title>Pusher Sendgrid Integration</title>
   <script src="//js.pusher.com/2.2/pusher.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.rawgit.com/nostalgiaz/bootstrap-switch/master/dist/css/bootstrap3/bootstrap-switch.min.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/daneden/animate.css/master/animate.min.css">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap-switch.min.css">
+  <link rel="stylesheet" type="text/css" href="animate.min.css">
   <link rel="stylesheet" type="text/css" href="bootstrap-overrides.css">
   <link rel="stylesheet" type="text/css" href="styles.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  <script src="https://cdn.rawgit.com/nostalgiaz/bootstrap-switch/master/dist/js/bootstrap-switch.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script src="bootstrap-switch.min.js"></script>
 </head>
 <body>
 
@@ -67,6 +67,7 @@
       </div>
     </div>
     <script>
+
     $("[name='my-checkbox']").bootstrapSwitch({
       onText: "Online",
       offText: "Offline"
@@ -75,6 +76,7 @@
 
     var channelName = '<%= @channel_name %>';
     var channel = pusher.subscribe(channelName);
+
 
     function listenForNotifications() {
       channel.bind('new_notification', function(data){
@@ -90,6 +92,7 @@
         });
       });
     }
+
     function diagramTransition(type){
 
       var choice = ["#top-left", "#top-right"]
@@ -118,8 +121,45 @@
       }
     });
 
+
+
+
+    var mailIconMovedToOtherDiagram;
+    var mailIconMovedBack = false;
+
+    function isSmallScreen(){
+      return window.innerWidth <= 740;
+    }
+
+    function moveMailIconToOtherDiagram(){
+      $("#you-got-mail").detach().appendTo($("#app-diagram"));
+      mailIconMovedToOtherDiagram = true;
+      mailIconMovedBack = false;
+    }
+
+    function moveMailIconBack(){
+      $("#you-got-mail").detach().appendTo($("#email-diagram"));
+      mailIconMovedBack = true;
+      mailIconMovedToOtherDiagram = false;
+    }
+
+    if (isSmallScreen()) moveMailIconToOtherDiagram();
+
+    window.onresize = function(event){
+      if (isSmallScreen()){
+        if (mailIconMovedToOtherDiagram) return;
+        moveMailIconToOtherDiagram();
+      } else {
+        if (!mailIconMovedToOtherDiagram || mailIconMovedBack) return;
+        moveMailIconBack()
+      }
+    }
+
+
     function youGotMail(){
-      $('#you-got-mail').show().delay(3000).queue(function(next){
+      var element = (mailIconMovedToOtherDiagram) ? "#app-diagram #you-got-mail" : "#you-got-mail"
+
+      $(element).show().delay(3000).queue(function(next){
         var self = this;
         $(self).addClass("fadeOut")
         setTimeout(function(){
@@ -139,11 +179,16 @@
       }
 
       if (email && notification){
+        var self = this;
+        $(this).attr('disabled', true);
+
         $.post('/notification', {
           message: message,
           channel_name: channelName,
           email: email
-        })
+        }).success(function(){
+          $(self).attr('disabled', false);
+        });
       } else {
         alert('Form invalid bro')
       }
