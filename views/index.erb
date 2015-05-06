@@ -117,27 +117,33 @@
         diagramTransition("email");
       }
     });
+
+    function youGotMail(){
+      $('#you-got-mail').show().delay(3000).queue(function(next){
+        var self = this;
+        $(self).addClass("fadeOut")
+        setTimeout(function(){
+          $(self).removeClass("fadeOut");
+          $(self).hide();
+        }, 2000)
+        next();
+      });
+    }
+
     $('#submit').on('click', function(){
       var message = $('#notification').val();
       var email = $('#email').val();
+
+      if (!pusher.channel(channelName)) {
+        youGotMail();
+      }
+
       if (email && notification){
         $.post('/notification', {
           message: message,
           channel_name: channelName,
           email: email
-        }).success(function(){
-          if (!pusher.channel(channelName)) {
-            $('#you-got-mail').show().delay(3000).queue(function(next){
-              var self = this;
-              $(self).addClass("fadeOut")
-              setTimeout(function(){
-                $(self).remove();
-              }, 2000)
-              next();
-            });
-          } else {
-          }
-        });
+        })
       } else {
         alert('Form invalid bro')
       }

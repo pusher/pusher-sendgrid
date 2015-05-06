@@ -71,7 +71,7 @@ div#switch div#top-right{
 
 
 div#send {
-  margin-top:75px;
+  margin-top:50px;
 }
 
 input.create-notification {
@@ -121,9 +121,9 @@ span.bootstrap-switch-handle-on, span.bootstrap-switch-handle-off {
   color: white !important;
 }
 
-/*span.bootstrap-switch-handle-off {
-  background: transparent !important;
-}*/
+span.bootstrap-switch-handle-off {
+  background: #aac0c6 !important;
+}
 
 h1.page-heading{
   color: white;
@@ -135,6 +135,7 @@ h1.page-heading{
 .page-subheading {
   font-weight: 200;
   line-height: 32px;
+  margin-bottom: 50px;
 }
 
 .small-logo, .full-logo {
@@ -281,6 +282,11 @@ p#mail-alert {
 
 @media screen and (max-width: 850px){
   div.diagram {width: 250px;}
+
+  div#you-got-mail {
+    margin-top: 10%;
+  }
+
 }
 
 @media screen and (max-width: 810px) {
