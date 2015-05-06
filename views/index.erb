@@ -156,13 +156,18 @@
       }
     }
 
+    function isEmail(email) {
+      var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      return regex.test(email);
+    }
+
     $('.create-notification').on('keyup', validateForm);
 
     function validateForm(){
       var message = $('#notification').val();
       var email = $('#email').val();
       var button = $('#submit');
-      if (message && email) {
+      if (message && isEmail(email)) {
         button.attr('disabled', false)
       } else {
         if (!button.is('[disabled]')) button.attr('disabled', true);
