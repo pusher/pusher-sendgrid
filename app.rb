@@ -24,7 +24,22 @@ post '/notification' do
       m.to      = params[:email]
       m.from    = 'no-reply@pusher.com'
       m.subject = "New Notification From Pusher"
-      m.html    = params[:message]
+      m.html    = 
+      <<-MESSAGE 
+      <p>Hey there!</p>
+
+      <p> While you were offline, you received this notification: </p>
+
+       <blockquote> <b>#{params[:message]}</b> </blockquote>
+
+      <p>This was sent through http://pusher-sendgrid.herokuapp.com.</p>
+
+      <p> You can follow the tutorial to add this nifty feature to your app <a href="http://blog.pusher.com/pusher-sendgrid">here</a>.</p>
+
+      <p>Thanks!</p>
+
+      <b>The Pusher Team</b>
+      MESSAGE
     end
     sendgrid.send email
   end
