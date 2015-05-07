@@ -21,6 +21,10 @@ a.btn-default.submit-notification#submit[disabled] {
   border-color: inherit !important;
 }
 
+.bootstrap-switch-container {
+  width: 200px;
+}
+
 .bootstrap-switch .bootstrap-switch-handle-on,
 .bootstrap-switch-label,
 .bootstrap-switch .bootstrap-switch-handle-off {
