@@ -32,6 +32,11 @@ a.btn-default.submit-notification#submit[disabled] {
   padding: 8px 12px !important;
 }
 
+div#email-input-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
 .signup-link {
   color: #FFFFFF;
   text-decoration: none;
@@ -59,7 +64,7 @@ header.navbar {
 }
 
 div.inner {
-  margin-top: 100px;
+  margin-top: 70px;
 }
 
 div.bootstrap-switch {
@@ -155,7 +160,10 @@ h1.page-heading{
 }
 
 p.disclaimer {
-  margin-bottom: 30px;
+  position: absolute;
+  opacity: 0.7;
+  left: 10px;
+  bottom: -25px;
 }
 
 .small-logo, .full-logo {
@@ -320,6 +328,14 @@ p#mail-alert {
 
   input.create-notification {
     text-align: center;
+  }
+
+  p.disclaimer {
+    left: 45;
+  }
+
+  div#email-input-wrapper {
+    margin-bottom: 30px;
   }
 
   #switch {

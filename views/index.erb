@@ -33,11 +33,12 @@
         Escape Notification Overload With Pusher and Sendgrid
       </h1>
       <h4 class="text-center page-subheading">Flick the switch to online, and you'll get an in-app notification with Pusher. Flick it to offline, and you'll get an email via Sendgrid.</h4>
-      <p class="text-center disclaimer">We will not store your email address.</p>
+      <!-- <p class="text-center disclaimer">We will not store your email address.</p> -->
         <div class="inputs text-center">
-          <span id="email-input-wrapper">
+          <div id="email-input-wrapper">
             <input autocomplete="off" id="email" class="create-notification" type="email" placeholder="Your email address">
-          </span>
+            <p class="disclaimer">We will not store your email address.</p>
+          </div>
           <span id="notification-message-wrapper">
             <input autocomplete="off"  class="create-notification" id="notification" type="text" placeholder="Type your message...">
           </span>
@@ -49,7 +50,6 @@
               <div id="you-got-mail" class="animated fadeInUpBig">
                 <p id="mail-alert">You've got mail!</p>
                 <h1 class="mail-icon">E</h1>
-
               </div>
             </div>
             <div id="switch">
