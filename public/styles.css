@@ -2,7 +2,8 @@
 
 @font-face {
   font-family: 'Icomoon';
-  src: url('fonts/icomoon.ttf')  format('truetype'), /* Safari, Android, iOS */
+  src:  url('/fonts/icomoon.ttf')  format('truetype'), /* Safari, Android, iOS */
+        url('/fonts/icomoon.woff') format('woff') /* Pretty Modern Browsers */
 }
 
 body {
